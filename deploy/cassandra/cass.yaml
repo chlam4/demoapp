@@ -569,8 +569,6 @@ spec:
   volumeClaimTemplates:
   - metadata:
       name: cass-persistent-storage-claim
-      annotations:
-        volume.beta.kubernetes.io/storage-class: "cass"
     spec:
       accessModes: [ "ReadWriteOnce" ]
       resources:

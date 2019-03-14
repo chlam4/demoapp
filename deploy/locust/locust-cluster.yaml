@@ -7,7 +7,7 @@ metadata:
     name: locust
     role: master
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
     - port: 8089
       nodePort: 30089
@@ -51,7 +51,7 @@ spec:
             - name: TARGET_HOST
               # Replace the IP with the twitter app IP
               # e.g., value: "http://35.237.107.176:8699"
-              value: "http://<IP>:8699"
+              value: "http://a75ff1c22363811e9925c06e28d17316-492216746.us-west-2.elb.amazonaws.com:8699"
             - name: MAX_TWITTER_USER_ID
               value: "101"
             - name: MAX_NUM_FOLLOWS
@@ -68,8 +68,8 @@ spec:
               value: "1000"
             - name: NEXT_REQUEST_MAX_WAIT_MS
               value: "10000"
-#            - name: ENABLE_TIME_SLOT_PROBABILITY
-#              value: "1"
+            - name: ENABLE_TIME_SLOT_PROBABILITY
+              value: "1"
             - name: LOCUSTFILE
               value: "locustfile.py"
           ports:
@@ -91,7 +91,7 @@ metadata:
     name: locust
     role: worker
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -110,7 +110,7 @@ spec:
             - name: TARGET_HOST
               # Replace the IP with the twitter app IP
               # e.g., value: "http://35.237.107.176:8699"
-              value: "http://<IP>:8699"
+              value: "http://a75ff1c22363811e9925c06e28d17316-492216746.us-west-2.elb.amazonaws.com:8699"
             - name: MAX_TWITTER_USER_ID
               value: "101"
             - name: MAX_NUM_FOLLOWS
@@ -127,7 +127,7 @@ spec:
               value: "1000"
             - name: NEXT_REQUEST_MAX_WAIT_MS
               value: "10000"
-#            - name: ENABLE_TIME_SLOT_PROBABILITY
-#              value: "1"
+            - name: ENABLE_TIME_SLOT_PROBABILITY
+              value: "1"
             - name: LOCUSTFILE
               value: "locustfile.py"
